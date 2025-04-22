@@ -3,7 +3,14 @@
 </script>
 
 <section
-  class="flex items-start justify-center md:items-start md:justify-start min-h-screen overflow-hidden c-space"
+  class="hero-section c-space"
 >
   <HeroText />
 </section>
+
+<style lang="postcss">
+  @reference "src/app.css";
+.hero-section {
+    @apply flex items-start justify-center md:items-start md:justify-start min-h-screen overflow-hidden;
+  }
+</style>
