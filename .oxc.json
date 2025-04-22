@@ -1,0 +1,9 @@
+{
+  "fix": true,
+  "fix_kind": "all",
+  "disable_nested_config": false,
+  "rules": {
+    "no-unused-vars": "error",
+    "no-undef": "error"
+  }
+}
