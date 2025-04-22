@@ -10,14 +10,13 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "oxlint",
-		"lint:fix": "oxlint --fix",
-		"format": "oxc format",
-		"format:fix": "oxc format --write",
-		"commit": "gitmoji -c"
+		"lint": "npx oxlint",
+		"lint:fix": "npx oxlint --fix",
+		"format": "npx oxlint format",
+		"format:fix": "npx oxlint format --write",
+		"commit": "git add . && gitmoji -c"
 	},
 	"devDependencies": {
-
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
@@ -35,5 +34,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"oxlint": "^0.16.7"
 	}
 }

@@ -1,9 +1,16 @@
 {
   "fix": true,
-  "fix_kind": "all",
+  "fix_kind": "safe_fix_or_suggestion",
   "disable_nested_config": false,
   "rules": {
     "no-unused-vars": "error",
-    "no-undef": "error"
-  }
+    "no-undef": "error",
+    "no-console": "warn",
+    "eqeqeq": "error"
+  },
+  "exclude": [
+    "node_modules/**",
+    ".svelte-kit/**",
+    "build/**"
+  ]
 }

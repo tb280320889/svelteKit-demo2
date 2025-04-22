@@ -1,11 +1,12 @@
 {
   "oxc.enable": true,
-  "oxc.lint.run": "onType",
+  "oxc.lint.run": "onSave",
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": true
   },
   "editor.formatOnSave": true,
   "oxc.flags": {
-    "fix_kind": "all"
-  }
+    "fix_kind": "safe_fix_or_suggestion"
+  },
+  "oxc.trace.server": "messages"
 }
