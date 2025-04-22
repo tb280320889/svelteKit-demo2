@@ -1,6 +1,6 @@
 <script lang="ts">
   import "../app.css"
-  import NavBar from "../lib/components/nav/NavBar.svelte"
+  import NavBar from "../nav/NavBar.svelte"
 
   let { children } = $props()
   let isOpen = $state(false)
