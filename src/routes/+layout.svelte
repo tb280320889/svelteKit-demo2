@@ -1,7 +1,13 @@
 <script lang="ts">
-	import '../app.css';
-	
-	let { children } = $props();
+  import "../app.css"
+  import NavBar from "../lib/components/nav/NavBar.svelte"
+
+  let { children } = $props()
+  let isOpen = $state(false)
 </script>
 
-{@render children()}
+<div class="container mx-auto max-w-7xl">
+  <NavBar />
+
+  {@render children()}
+</div>
