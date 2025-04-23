@@ -36,6 +36,10 @@
 		]
 	},
 	"dependencies": {
-		"oxlint": "^0.16.7"
+		"@threlte/core": "^8.0.2",
+		"@threlte/extras": "^9.1.4",
+		"@types/three": "^0.175.0",
+		"oxlint": "^0.16.7",
+		"three": "^0.175.0"
 	}
 }
