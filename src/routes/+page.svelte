@@ -1,13 +1,13 @@
 <script lang="ts">
 
   import Hero from "$lib/components/index/body/Hero.svelte"
+  import About from "$lib/components/index/about/About.svelte"
 
 </script>
 
-
-<!-- todo:hero -->
  <Hero />
 <!-- todo:about -->
+ <About />
 <!-- todo:projects -->
 <!-- todo:experience -->
 <!-- todo:testimonial -->

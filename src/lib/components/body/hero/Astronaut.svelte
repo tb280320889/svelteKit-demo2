@@ -6,35 +6,54 @@ Source: https://sketchfab.com/3d-models/tenhun-falling-spaceman-fanart-9fd80b6a2
 Title: Tenhun Falling spaceman (FanArt)
 -->
 
+<!-- todo:optimize performance -->
 <script lang="ts">
+  // #region Imports
   import { T } from "@threlte/core"
   import { useGltfAnimations, useGltf } from "@threlte/extras"
   import { Group } from "three"
   import { MediaQuery } from "svelte/reactivity"
+  // #endregion Imports
 
+  // #region Responsive Media Query
   // 使用 Svelte 5 的 MediaQuery 类创建响应式媒体查询
   // fallback 参数设置为 false，表示在服务器端渲染时默认为非移动设备
   const mobileQuery = $state(new MediaQuery("max-width: 853px", false))
 
   // 使用 $derived 获取当前媒体查询结果
   const isMobile = $derived(mobileQuery.current)
+  // #endregion Responsive Media Query
 
+  // #region Responsive Properties
   // 根据媒体查询计算属性
   // 调整模型的缩放比例和位置
-  const computedScale = $derived(isMobile ? 0.7 : 0.9) // 增大缩放比例
+  const computedScale = $derived(isMobile ? 0.55 : 0.7) // 增大缩放比例
   const computedPosition = $derived(isMobile ? [0.8, 3, 7.5] : [0.5, 3, 9.5]) // 将模型放在中心位置
+  // #endregion Responsive Properties
 
+  // #region Props and Reactivity
   // Props with defaults using Svelte 5 runes
   let {
-    scale = computedScale,
-    position = computedPosition as [number, number, number],
-    rotation = [0, 0, 0] as [number, number, number], // 将旋转重置为零，使模型面向前方
+    scale = 0.7, // 使用静态默认值
+    position = [0, 0, 0] as [number, number, number], // 使用静态默认值
+    rotation = [60, 270, 210] as [number, number, number], // 保持原来的旋转值
   } = $props<{
     scale?: number
     position?: [number, number, number]
     rotation?: [number, number, number]
   }>()
 
+  // 使用 $effect 监听 computedScale 和 computedPosition 的变化
+  $effect(() => {
+      scale = computedScale;
+
+    if (position[0] === 0 && position[1] === 0 && position[2] === 0) { // 如果使用的是默认值
+      position = computedPosition as [number, number, number];
+    }
+  })
+  // #endregion Props and Reactivity
+
+  // #region 3D Model Setup
   // Create a reference for the group using Svelte 5 runes
   let group = $state<Group | undefined>(undefined)
 
@@ -49,7 +68,9 @@ Title: Tenhun Falling spaceman (FanArt)
       group.position.y = yPosition
     }
   })
+  // #endregion 3D Model Setup
 
+  // #region Animation Control
   // 动画状态
   let isAnimationPlaying = $state<boolean>(false)
 
@@ -63,7 +84,6 @@ Title: Tenhun Falling spaceman (FanArt)
         $actions["Idle"].reset().play()
         isAnimationPlaying = true
         console.log("Playing animation: Idle with increased amplitude")
-        rotation.x++
       }
     }
   })
@@ -85,11 +105,17 @@ Title: Tenhun Falling spaceman (FanArt)
       console.log("Stopped animation: Idle")
     }
   }
+  // #endregion Animation Control
 </script>
 
-<!-- 直接使用 useGltf 返回的场景 -->
+<!-- #region 3D Model Rendering -->
 {#if $gltf}
+  <!-- #region Model Group Container -->
   <T.Group bind:ref={group} {rotation} {scale} {position}>
+    <!-- #region GLTF Scene -->
     <T is={$gltf.scene} />
+    <!-- #endregion GLTF Scene -->
   </T.Group>
+  <!-- #endregion Model Group Container -->
 {/if}
+<!-- #endregion 3D Model Rendering -->

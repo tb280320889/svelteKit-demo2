@@ -4,7 +4,6 @@
   import Astronaut from "$lib/components/body/hero/Astronaut.svelte"
   import { T } from "@threlte/core"
   import { Canvas } from "@threlte/core"
-  // 移除 OrbitControls 导入，因为我们不再需要它
 </script>
 
 <section
@@ -12,9 +11,10 @@
 >
   <HeroText />
   <ParallaxBackground />
-  <figure class="absolute inset-0" style="width:100vw;height:100vh;pointer-events:auto;z-index:10;">
+  <figure class="absolute inset-0" >
     <Canvas>
-      <T.PerspectiveCamera position={[0, 0.5, 15]} makeDefault />
+      <!-- todo:loader -->
+      <T.PerspectiveCamera position={[0, 0.25, 12]} makeDefault />
       <Astronaut />
     </Canvas>
 
