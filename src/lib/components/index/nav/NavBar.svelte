@@ -1,13 +1,54 @@
 <script lang="ts">
-  let isOpen = $state(false)
-  let tos = ["Home", "About", "Work", "Contact"]
+  import { onMount } from "svelte"
+  import { browser } from "$app/environment"
+
+  let isScrolled = $state(false)
+  let isMenuOpen = $state(false)
+
+  // 监听滚动事件，改变导航栏样式
+  onMount(() => {
+    if (!browser) return
+
+    const handleScroll = () => {
+      isScrolled = window.scrollY > 50
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  })
+
+  // 平滑滚动到指定部分
+  function scrollToSection(e: Event, id: string) {
+    e.preventDefault()
+
+    if (!browser) return
+
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+
+      // 更新 URL
+      history.pushState(null, "", `#${id}`)
+
+      // 如果在移动设备上，关闭菜单
+      if (isMenuOpen) {
+        isMenuOpen = false
+      }
+    }
+  }
+
+  let tos = ["Home", "About"]
 </script>
 
 <!-- #region 封装重复html模板 -->
 {#snippet Navigation(tos: string[])}
   {#each tos as to}
     <li class="nav-li">
-      <a class="nav-link" href="#{to}">
+      <a class="nav-link" href="#{to}"
+      onclick={(e) => scrollToSection(e, to)}>
         {to}
       </a>
     </li>
@@ -31,10 +72,10 @@
 
       <!-- #region 移动端菜单按钮 -->
       <button
-        onclick={() => (isOpen = !isOpen)}
+        onclick={() => (isMenuOpen = !isMenuOpen)}
         class="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
         ><img
-          src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
+          src={isMenuOpen ? "assets/close.svg" : "assets/menu.svg"}
           alt="toggle"
           class="w-6 h-6"
         /></button
@@ -54,7 +95,7 @@
 
   <!-- #region 移动端菜单 -->
   <!-- todo:添加动效 -->
-  {#if isOpen}
+  {#if isMenuOpen}
     <div class="block overflow-hidden text-center sm:hidden">
       <nav class="pb-5">
         <ul class="nav-ul">

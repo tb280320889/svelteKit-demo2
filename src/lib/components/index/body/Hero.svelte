@@ -6,7 +6,7 @@
   import { Canvas } from "@threlte/core"
 </script>
 
-<section
+<section id="Home"
   class="hero-section c-space"
 >
   <HeroText />

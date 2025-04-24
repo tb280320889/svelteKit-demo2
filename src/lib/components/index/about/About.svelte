@@ -19,7 +19,8 @@
   ]
 </script>
 
-<section class="c-space section-spacing">
+<section id="About"
+class="c-space section-spacing">
   <h2 class="text-heading">About me</h2>
   <div class="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
     <!-- grid 1 -->
