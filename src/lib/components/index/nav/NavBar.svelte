@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { browser } from "$app/environment"
-  import Globe from "../../body/about/Globe.svelte"
+  import { pushState } from "$app/navigation"
 
   let isScrolled = $state(false)
   let isMenuOpen = $state(false)
@@ -32,7 +32,7 @@
       element.scrollIntoView({ behavior: "smooth" })
 
       // 更新 URL
-      history.pushState(null, "", `#${id}`)
+      pushState(`#${id}`, `#${id}`)
 
       // 如果在移动设备上，关闭菜单
       if (isMenuOpen) {
