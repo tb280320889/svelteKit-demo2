@@ -17,11 +17,11 @@ interface FloatingAnimationOptions {
 
 /**
  * 浮动动画action - 添加物理动画效果到任何元素
- * 
+ *
  * 元素会随机移动，鼠标靠近时加速，碰到容器边界时弹开
  */
 export const floatingAnimation: Action<HTMLElement, FloatingAnimationOptions> = (
-  node, 
+  node,
   options = {}
 ) => {
   // 默认配置
@@ -29,9 +29,9 @@ export const floatingAnimation: Action<HTMLElement, FloatingAnimationOptions> = 
     randomPosition: true,
     initialX: 0,
     initialY: 0,
-    baseSpeed: 0.01,
+    baseSpeed: 0, // 初始速度为0，不自动移动
     accelerationFactor: 3,
-    accelerationDuration: 2000,
+    accelerationDuration: 2000, // 移动持续2秒
     accelerationDistance: 150,
     containerSelector: '',
     ...options
@@ -42,12 +42,12 @@ export const floatingAnimation: Action<HTMLElement, FloatingAnimationOptions> = 
     x: config.randomPosition ? Math.random() * 80 : config.initialX,
     y: config.randomPosition ? Math.random() * 80 : config.initialY
   };
-  
+
   let velocity = {
     x: (Math.random() * 2 - 1) * 0.05,
     y: (Math.random() * 2 - 1) * 0.05
   };
-  
+
   let currentSpeed = config.baseSpeed;
   let accelerated = false;
   let accelerationTimer: number | null = null;
@@ -85,18 +85,28 @@ export const floatingAnimation: Action<HTMLElement, FloatingAnimationOptions> = 
       Math.pow(mousePosition.y - nodeCenterY, 2)
     );
 
-    // 如果鼠标在指定距离内且未加速
+    // 如果鼠标靠近且元素当前没有移动
     if (distance < config.accelerationDistance && !accelerated) {
+      // 生成随机移动方向（如果当前速度为0）
+      if (currentSpeed === 0) {
+        velocity = {
+          x: (Math.random() * 2 - 1) * 0.05,
+          y: (Math.random() * 2 - 1) * 0.05
+        };
+      }
+
+      // 设置为移动状态
       accelerated = true;
-      currentSpeed = config.baseSpeed * config.accelerationFactor;
+      currentSpeed = 0.03; // 设置一个适当的移动速度
 
       // 重置加速计时器
       if (accelerationTimer) {
         clearTimeout(accelerationTimer);
       }
 
+      // 设置计时器，2秒后停止移动
       accelerationTimer = window.setTimeout(() => {
-        currentSpeed = config.baseSpeed;
+        currentSpeed = 0; // 停止移动
         accelerated = false;
         accelerationTimer = null;
       }, config.accelerationDuration);
@@ -158,10 +168,13 @@ export const floatingAnimation: Action<HTMLElement, FloatingAnimationOptions> = 
     node.style.left = `${position.x}%`;
     node.style.top = `${position.y}%`;
 
+    // 初始速度为0，不移动
+    currentSpeed = 0;
+
     // 添加事件监听
     window.addEventListener('mousemove', handleMouseMove);
 
-    // 开始动画循环
+    // 开始动画循环（即使初始速度为0，也需要保持循环以响应鼠标交互）
     animationFrameId = requestAnimationFrame(updatePosition);
   }
 
