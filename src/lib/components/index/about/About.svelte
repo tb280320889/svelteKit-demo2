@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CopyEmailButton from "../../body/about/CopyEmailButton.svelte"
   import FloatingItem from "../../body/about/FloatingItem.svelte"
   import Globe from "../../body/about/Globe.svelte"
   // import { Pane, Slider } from "svelte-tweakpane-ui"
@@ -78,7 +79,14 @@ class="c-space section-spacing">
       </figure>
     </div>
     <!-- grid 4 -->
-    <div class="grid-special-color grid-4"></div>
+    <div class="grid-special-color grid-4">
+      <div class="flex flex-col items-center justify-center gap-4 size-full">
+        <p class="text-center headtext">
+          Do you want to start a project together
+        </p>
+        <CopyEmailButton />
+      </div>
+    </div>
     <!-- grid 5 -->
     <div class="grid-default-color grid-5"></div>
   </div>
