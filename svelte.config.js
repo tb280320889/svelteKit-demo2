@@ -19,10 +19,7 @@ const config = {
 			assets: 'build',
 			fallback: null,
 			precompress: true // 启用预压缩
-		  }),
-		  prerender: {
-			default: true // 预渲染所有页面
-		  }
+		  })
 	}
 };
 

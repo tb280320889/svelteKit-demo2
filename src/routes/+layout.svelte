@@ -5,7 +5,7 @@
 
   let { children } = $props()
   let isOpen = $state(false)
-  export const prerender = true
+
 </script>
 
 <div class="container mx-auto max-w-7xl">
