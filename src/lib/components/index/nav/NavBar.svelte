@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { browser } from "$app/environment"
+  import Globe from "../../body/about/Globe.svelte"
 
   let isScrolled = $state(false)
   let isMenuOpen = $state(false)

@@ -1,5 +1,12 @@
 <script lang="ts">
   import FloatingItem from "../../body/about/FloatingItem.svelte"
+  import Globe from "../../body/about/Globe.svelte"
+  // import { Pane, Slider } from "svelte-tweakpane-ui"
+
+  // let paneExpanded = $state(false)
+
+  // let left = $state(10)
+  // let top = $state(10)
 
   // 文本卡片数据
   const textCards = [
@@ -58,10 +65,26 @@ class="c-space section-spacing">
       </div>
     </div>
     <!-- grid 3 -->
-    <div class="grid-black-color grid-3"></div>
+    <div class="grid-black-color grid-3 relative">
+      <div class="z-10 w-[50%]">
+        <p class="headtext">Time Zone</p>
+        <p class="subtext">
+          I'm based in China, and open to remote work worldwide
+        </p>
+      </div>
+      <figure class="absolute  w-[120%] h-[120%]" style="left: 30%; top: 10%">
+      <!-- <figure class="absolute left-[{left}%] top-[{top}%]"> -->
+        <Globe />
+      </figure>
+    </div>
     <!-- grid 4 -->
     <div class="grid-special-color grid-4"></div>
     <!-- grid 5 -->
     <div class="grid-default-color grid-5"></div>
   </div>
 </section>
+
+<!-- <Pane position="draggable" title="Gaussian Splatting" bind:expanded={paneExpanded}>
+  <Slider bind:value={left} label="left" min={-100} max={200} step={1} />
+  <Slider bind:value={top} label="top" min={-100} max={200} step={1} />
+</Pane> -->

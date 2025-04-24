@@ -4,7 +4,7 @@
   import NavBar from "$lib/components/index/nav/NavBar.svelte"
 
   let { children } = $props()
-  let isOpen = $state(false)
+
 
 </script>
 
