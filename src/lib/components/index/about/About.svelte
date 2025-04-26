@@ -1,6 +1,7 @@
 <script lang="ts">
   import CopyEmailButton from "../../body/about/CopyEmailButton.svelte"
   import FloatingItem from "../../body/about/FloatingItem.svelte"
+  import Frameworks from "../../body/about/Frameworks.svelte"
   import Globe from "../../body/about/Globe.svelte"
   // import { Pane, Slider } from "svelte-tweakpane-ui"
 
@@ -27,8 +28,7 @@
   ]
 </script>
 
-<section id="About"
-class="c-space section-spacing">
+<section id="About" class="c-space section-spacing">
   <h2 class="text-heading">About me</h2>
   <div class="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
     <!-- grid 1 -->
@@ -66,15 +66,15 @@ class="c-space section-spacing">
       </div>
     </div>
     <!-- grid 3 -->
-    <div class="grid-black-color grid-3 relative">
+    <div class="grid-black-color grid-3">
       <div class="z-10 w-[50%]">
         <p class="headtext">Time Zone</p>
         <p class="subtext">
           I'm based in China, and open to remote work worldwide
         </p>
       </div>
-      <figure class="absolute  w-[120%] h-[120%]" style="left: 30%; top: 10%">
-      <!-- <figure class="absolute left-[{left}%] top-[{top}%]"> -->
+      <figure class="absolute w-[120%] h-[120%]" style="left: 30%; top: 10%">
+        <!-- <figure class="absolute left-[{left}%] top-[{top}%]"> -->
         <Globe />
       </figure>
     </div>
@@ -88,7 +88,20 @@ class="c-space section-spacing">
       </div>
     </div>
     <!-- grid 5 -->
-    <div class="grid-default-color grid-5"></div>
+    <div class="grid-default-color grid-5">
+      <div class="z-10 w-[50%]">
+        <p class="headText">Teck Stack</p>
+        <p class="subtext">
+          I specialize in a variety of languages, frameworks, and tools taht
+          allow me to build robust and scalable applications
+        </p>
+      </div>
+      <div
+        class="absolute inset-y-0 md:inset-y-9 w-full h-full start-[50%] md:scale-125"
+      >
+        <Frameworks />
+      </div>
+    </div>
   </div>
 </section>
 
